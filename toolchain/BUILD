@@ -2,16 +2,6 @@
 
 load("@rules_cc//cc:defs.bzl", "cc_toolchain", "cc_toolchain_suite")
 
-# This is for legacy compatibility, it will disappear in the future
-cc_toolchain_suite(
-    name = "toolchain",
-    toolchains = {
-        "darwin": ":cc_toolchain_darwin",
-        "k8": ":cc_toolchain_linux_x86_64",
-        "x64_windows": ":cc_toolchain_windows_x86_32",
-    },
-)
-
 cc_toolchain(
     name = "cc_toolchain_darwin",
     all_files = "//toolchain/riscv-none-elf/darwin_x86_64:all_files",
