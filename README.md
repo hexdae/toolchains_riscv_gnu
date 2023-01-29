@@ -1,34 +1,36 @@
 <p align="center">
 
-<a href="https://github.com/d-asnaghi/bazel-riscv-none-elf/blob/master/LICENSE">
-    <img alt="GitHub license" src="https://img.shields.io/github/license/d-asnaghi/bazel-riscv-none-elf?color=success">
+<a href="https://github.com/hexdae/rules_riscv_gcc/blob/master/LICENSE">
+    <img alt="GitHub license" src="https://img.shields.io/github/license/hexdae/rules_riscv_gcc?color=success">
 </a>
 
-<a href="https://github.com/d-asnaghi/bazel-riscv-none-elf/stargazers">
-    <img alt="GitHub stars" src="https://img.shields.io/github/stars/d-asnaghi/bazel-riscv-none-elf?color=success">
+<a href="https://github.com/hexdae/rules_riscv_gcc/stargazers">
+    <img alt="GitHub stars" src="https://img.shields.io/github/stars/hexdae/rules_riscv_gcc?color=success">
 </a>
 
-<a href="https://github.com/d-asnaghi/bazel-riscv-none-elf/issues">
-    <img alt="GitHub issues" src="https://img.shields.io/github/issues/d-asnaghi/bazel-riscv-none-elf">
+<a href="https://github.com/hexdae/rules_riscv_gcc/issues">
+    <img alt="GitHub issues" src="https://img.shields.io/github/issues/hexdae/rules_riscv_gcc">
 </a>
 
-<a href="https://github.com/d-asnaghi/bazel-riscv-none-elf/actions">
-    <img alt="Linux" src="https://github.com/d-asnaghi/bazel-riscv-none-elf/workflows/Linux/badge.svg">
+<a href="https://github.com/hexdae/rules_riscv_gcc/actions">
+    <img alt="Linux" src="https://github.com/hexdae/rules_riscv_gcc/workflows/Linux/badge.svg">
 </a>
 
-<a href="https://github.com/d-asnaghi/bazel-riscv-none-elf/actions">
-    <img alt="macOS" src="https://github.com/d-asnaghi/bazel-riscv-none-elf/workflows/macOS/badge.svg">
+<a href="https://github.com/hexdae/rules_riscv_gcc/actions">
+    <img alt="macOS" src="https://github.com/hexdae/rules_riscv_gcc/workflows/macOS/badge.svg">
 </a>
 
-<a href="https://github.com/d-asnaghi/bazel-riscv-none-elf/actions">
-    <img alt="Widnows" src="https://github.com/d-asnaghi/bazel-riscv-none-elf/workflows/Windows/badge.svg">
+<a href="https://github.com/hexdae/rules_riscv_gcc/actions">
+    <img alt="Windows" src="https://github.com/hexdae/rules_riscv_gcc/workflows/Windows/badge.svg">
 </a>
 
 </p>
 
-<p align="center">
+<p align="center" float="left">
 
-<img src="https://asnaghi.me/images/bazel-arm.png" width="400px"/>
+<img src="https://upload.wikimedia.org/wikipedia/en/thumb/7/7d/Bazel_logo.svg/1024px-Bazel_logo.svg.png?20170728105517" width="100px"/>
+
+<img src="https://riscv.org/wp-content/uploads/2022/08/RISCV-Compatible-e1661193684717-216x300.png" width="100px">
 
 </p>
 
@@ -42,7 +44,7 @@ You can follow the post [Bazel for ARM embedded toolchains](https://asnaghi.me/p
 ## Use the toolchain from this repo
 
 To get started with the arm none eabi embedded toolchain, copy the appropriate `WORKSPACE` setup
-from the [releases](https://github.com/d-asnaghi/bazel-riscv-none-elf/releases) page.
+from the [releases](https://github.com/hexdae/rules_riscv_gcc/releases) page.
 
 Using a stable commit from the repo is also an option,for example:
 
@@ -55,7 +57,7 @@ Using a stable commit from the repo is also an option,for example:
 git_repository(
     name = "riscv_none_elf",
     commit = "<commit>",
-    remote = "https://github.com/hexdae/bazel-riscv-none-elf",
+    remote = "https://github.com/hexdae/rules_riscv_gcc",
     shallow_since = "<value>",
 )
 
@@ -120,7 +122,7 @@ If you want to select some build attributes based on their compatibility with th
 config_setting(
     name = "riscv_none_compatible",
     constraint_values = [
-        "@platforms//cpu:arm",
+        "@platforms//cpu:riscv64",
         "@platforms//os:none",
     ],
 )
@@ -215,7 +217,7 @@ Use `bazelisk` as you would use `bazel`, this takes care of using the correct Ba
 ### Clone the repo
 
 ```bash
-git clone https://github.com/d-asnaghi/bazel-riscv-none-elf.git
+git clone https://github.com/hexdae/rules_riscv_gcc.git
 ```
 
 ### Build
