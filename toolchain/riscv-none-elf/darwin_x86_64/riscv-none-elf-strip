@@ -1,0 +1,3 @@
+#!/bin/bash
+set -euo pipefail
+external/riscv_none_elf_darwin_x86_64/bin/riscv-none-elf-strip "$@"

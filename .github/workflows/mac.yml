@@ -1,0 +1,19 @@
+name: macOS
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+
+  macos:
+    name: Build
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: build examples
+        run: |
+          bazelisk build examples:all
+          bazelisk build --config=legacy examples:all
