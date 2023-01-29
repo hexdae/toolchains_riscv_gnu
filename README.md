@@ -28,9 +28,9 @@
 
 <p align="center" float="left">
 
-<img src="https://upload.wikimedia.org/wikipedia/en/thumb/7/7d/Bazel_logo.svg/1024px-Bazel_logo.svg.png?20170728105517" width="100px"/>
+<img src="https://upload.wikimedia.org/wikipedia/en/thumb/7/7d/Bazel_logo.svg/1024px-Bazel_logo.svg.png?20170728105517" height="200px"/>
 
-<img src="https://riscv.org/wp-content/uploads/2022/08/RISCV-Compatible-e1661193684717-216x300.png" width="100px">
+<img src="https://riscv.org/wp-content/uploads/2022/08/RISCV-Compatible-e1661193684717-216x300.png" height="200px">
 
 </p>
 
