@@ -11,5 +11,5 @@ jobs:
       - uses: actions/checkout@v2
       - name: build examples
         run: |
-          bazelisk build examples:all
-          bazelisk build --config=legacy examples:all
+          bazelisk build //examples/...
+          bazelisk build --config=legacy //examples/...
