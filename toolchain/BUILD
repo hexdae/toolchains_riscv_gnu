@@ -1,6 +1,6 @@
 # toolchains/BUILD.bazel
 
-load("@rules_cc//cc:defs.bzl", "cc_toolchain", "cc_toolchain_suite")
+load("@rules_cc//cc:defs.bzl", "cc_toolchain")
 
 cc_toolchain(
     name = "cc_toolchain_darwin",
