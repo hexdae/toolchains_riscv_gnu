@@ -30,7 +30,7 @@
 
 <img src="https://upload.wikimedia.org/wikipedia/en/thumb/7/7d/Bazel_logo.svg/1024px-Bazel_logo.svg.png?20170728105517" height="200px"/>
 
-<img src="https://riscv.org/wp-content/uploads/2022/08/RISCV-Compatible-e1661193684717-216x300.png" height="200px">
+<img src="https://riscv.org/wp-content/uploads/2020/06/riscv-color.svg" height="200px">
 
 </p>
 
@@ -39,14 +39,10 @@ The goal of the project is to illustrate how to use a custom riscv-none-elf embe
 
 If this project was useful to you, give it a ⭐️ and I'll keep improving it!
 
-You can follow the post [Bazel for ARM embedded toolchains](https://asnaghi.me/post/embedded-bazel/) to get more details about this code.
-
 ## Use the toolchain from this repo
 
-To get started with the arm none eabi embedded toolchain, copy the appropriate `WORKSPACE` setup
-from the [releases](https://github.com/hexdae/rules_riscv_gcc/releases) page.
-
-Using a stable commit from the repo is also an option,for example:
+Using a stable commit from the repo is the recommended option for importing the rules. Future bazelmod expansion might
+be an option if there is enough interest
 
 ```python
 # WORKSPACE
