@@ -37,7 +37,7 @@ def riscv_none_elf_deps(name=""):
         name = "riscv_none_elf_windows_x86_32",
         sha256 = "1edf87d32975619076d3df558b8c1218daa54947f47b06c7ea9edb99e2290548",
         strip_prefix = "xpack-riscv-none-elf-gcc-12.2.0-1",
-        url = "https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/download/v12.2.0-1/pack-riscv-none-elf-gcc-12.2.0-1-win32-x64.zip",
+        url = "https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/download/v12.2.0-1/xpack-riscv-none-elf-gcc-12.2.0-1-win32-x64.zip",
     )
 
     native.register_toolchains(
