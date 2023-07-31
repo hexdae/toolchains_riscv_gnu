@@ -41,6 +41,7 @@ filegroup(
     name = "ar_files",
     srcs = [
         "riscv-none-elf-ar",
+        "@{}//:compiler_pieces".format(compiler),
         "@{}//:ar".format(compiler),
     ],
 )
