@@ -1,11 +1,11 @@
-name: Linux
+name: Remote Execution
 
 on: [push]
 
 jobs:
 
   linux:
-    name: Build
+    name: Bazel Remote Execution
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
