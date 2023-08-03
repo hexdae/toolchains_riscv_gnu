@@ -89,6 +89,15 @@ filegroup(
 )
 
 filegroup(
+    name = "size",
+    srcs = select({
+        "darwin": ["@riscv_none_elf_darwin_x86_64//:bin/riscv-none-elf-size"],
+        "linux": ["@riscv_none_elf_linux_x86_64//:bin/riscv-none-elf-size"],
+        "windows": ["@riscv_none_elf_windows_x86_32//:bin/riscv-none-elf-size.exe"],
+    }),
+)
+
+filegroup(
     name = "as",
     srcs = select({
         "darwin": ["@riscv_none_elf_darwin_x86_64//:bin/riscv-none-elf-as"],

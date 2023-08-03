@@ -42,3 +42,11 @@ genrule(
     cmd = "$(execpath @riscv_none_elf//:objcopy) -O ihex $< $@",
     tools = ["@riscv_none_elf//:objcopy"],
 )
+
+genrule(
+    name = "mock_size",
+    srcs = [":mock_binary"],
+    outs = ["mock.size"],
+    cmd = "$(execpath @riscv_none_elf//:size) $< > $@",
+    tools = ["@riscv_none_elf//:size"],
+)

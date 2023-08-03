@@ -12,3 +12,8 @@ jobs:
       - name: build examples
         run: |
           bazelisk build //examples/...
+      - name: remote execution
+        run: |
+          git clone https://github.com/bazelbuild/bazel-buildfarm
+          cd bazel-buildfarm && ./examples/bf-run start && cd ..
+          bazelisk build --config=remote --config=linux //examples/...

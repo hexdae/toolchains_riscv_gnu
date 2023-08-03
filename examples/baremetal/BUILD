@@ -29,3 +29,11 @@ genrule(
     cmd = "$(execpath @riscv_none_elf//:objcopy) -O ihex $< $@",
     tools = ["@riscv_none_elf//:objcopy"],
 )
+
+genrule(
+    name = "size",
+    srcs = [":baremetal"],
+    outs = ["baremetal.size"],
+    cmd = "$(execpath @riscv_none_elf//:size) $< > $@",
+    tools = ["@riscv_none_elf//:size"],
+)
