@@ -1,4 +1,4 @@
-name: Remote Execution
+name: Remote
 
 on: [push]
 

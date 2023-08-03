@@ -24,6 +24,10 @@
     <img alt="Windows" src="https://github.com/hexdae/rules_riscv_gcc/workflows/Windows/badge.svg">
 </a>
 
+<a href="https://github.com/hexdae/rules_riscv_gcc/actions">
+    <img alt="Remote" src="https://github.com/hexdae/rules_riscv_gcc/workflows/Remote/badge.svg">
+</a>
+
 </p>
 
 <p align="center" float="left">
@@ -38,6 +42,8 @@
 The goal of the project is to illustrate how to use a custom riscv-none-elf embedded toolchain with Bazel.
 
 If this project was useful to you, give it a ⭐️ and I'll keep improving it!
+
+This toolchain supports Bazel Remote Execution (it is fully hermetic)
 
 ## Use the toolchain from this repo
 
