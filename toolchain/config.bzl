@@ -19,26 +19,22 @@ def _impl(ctx):
         wrapper_path(ctx, "strip"),
     ]
 
-    include_flags = [
-        "-I",
+    include_paths = [
         "external/{}/riscv-none-elf/include".format(ctx.attr.gcc_repo),
-        "-I",
         "external/{}/lib/gcc/riscv-none-elf/{}/include".format(ctx.attr.gcc_repo, ctx.attr.gcc_version),
-        "-I",
         "external/{}/lib/gcc/riscv-none-elf/{}/include-fixed".format(ctx.attr.gcc_repo, ctx.attr.gcc_version),
-        "-I",
         "external/{}/riscv-none-elf/include/c++/{}/".format(ctx.attr.gcc_repo, ctx.attr.gcc_version),
-        "-I",
         "external/{}/riscv-none-elf/include/c++/{}/riscv-none-elf/".format(ctx.attr.gcc_repo, ctx.attr.gcc_version),
     ]
 
-    linker_flags = [
-        "-L",
+    linker_paths = [
         "external/{}/riscv-none-elf/lib".format(ctx.attr.gcc_repo),
-        "-L",
         "external/{}/lib/gcc/riscv-none-elf/{}".format(ctx.attr.gcc_repo, ctx.attr.gcc_version),
-        "-llibc.a",
-        "-llibgcc.a",
+    ]
+
+    libs = [
+        "libc.a",
+        "libgcc.a",
     ]
 
     toolchain_compiler_flags = feature(
@@ -59,7 +55,10 @@ def _impl(ctx):
                     ACTION_NAMES.clif_match,
                 ],
                 flag_groups = [
-                    flag_group(flags = include_flags),
+                    flag_group(flags = ["-I%{include_paths}"], iterate_over = "include_paths"),
+                    flag_group(flags = [
+                        "-no-canonical-prefixes",
+                    ]),
                 ],
             ),
         ],
@@ -74,7 +73,11 @@ def _impl(ctx):
                     ACTION_NAMES.linkstamp_compile,
                 ],
                 flag_groups = [
-                    flag_group(flags = linker_flags),
+                    flag_group(flags = ["-L%{linker_paths}"], iterate_over = "linker_paths"),
+                    flag_group(flags = ["-l%{libs}"], iterate_over = "libs"),
+                    flag_group(flags = [
+                        "-no-canonical-prefixes",
+                    ]),
                 ],
             ),
         ],
