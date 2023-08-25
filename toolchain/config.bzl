@@ -119,9 +119,7 @@ def _impl(ctx):
                 flag_groups = [
                     flag_group(
                         flags = [
-                            # "-Wl,-z,relro,-z,now",
                             "-pass-exit-codes",
-                            # "-lm",
                         ],
                     ),
                 ],
@@ -314,7 +312,7 @@ def _impl(ctx):
         enabled = True,
         flag_sets = [
             flag_set(
-                actions = [ACTION_NAMES.c_compile, ACTION_NAMES.assemble, ACTION_NAMES.preprocess_assemble],
+                actions = all_compile_actions,
                 flag_groups = [flag_group(flags = extra_cflags)],
             ),
         ] if len(extra_cflags) > 0 else [],
