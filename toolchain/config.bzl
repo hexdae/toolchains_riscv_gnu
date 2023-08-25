@@ -290,23 +290,6 @@ def _impl(ctx):
 
     dbg_feature = feature(name = "dbg")
 
-    user_compile_flags_feature = feature(
-        name = "user_compile_flags",
-        enabled = True,
-        flag_sets = [
-            flag_set(
-                actions = all_compile_actions,
-                flag_groups = [
-                    flag_group(
-                        flags = ["%{user_compile_flags}"],
-                        iterate_over = "user_compile_flags",
-                        expand_if_available = "user_compile_flags",
-                    ),
-                ],
-            ),
-        ],
-    )
-
     extra_cflags_feature = feature(
         name = "extra_cflags",
         enabled = True,
@@ -390,7 +373,6 @@ def _impl(ctx):
         objcopy_embed_flags_feature,
         opt_feature,
         dbg_feature,
-        user_compile_flags_feature,
         sysroot_feature,
         unfiltered_compile_flags_feature,
         redacted_dates_feature,
@@ -402,25 +384,22 @@ def _impl(ctx):
 
     return [
         cc_common.create_cc_toolchain_config_info(
-            abi_libc_version = "local",
-            abi_version = "local",
-            action_configs = action_configs,
-            artifact_name_patterns = [],
-            cc_target_os = None,
-            compiler = "gcc",
-            cxx_builtin_include_directories = cxx_builtin_include_directories,
-            features = features,
-            make_variables = [],
-            target_cpu = "local",
-            target_libc = "local",
-            tool_paths = [
-                tool_path(name = name, path = path)
-                for name, path in tool_paths.items()
-            ],
             ctx = ctx,
             toolchain_identifier = ctx.attr.toolchain_identifier,
             host_system_name = ctx.attr.host_system_name,
             target_system_name = "riscv-none-elf",
+            target_cpu = "riscv-none-elf",
+            target_libc = "gcc",
+            compiler = ctx.attr.gcc_repo,
+            abi_version = "eabi",
+            abi_libc_version = ctx.attr.gcc_version,
+            tool_paths = [
+                tool_path(name = name, path = path)
+                for name, path in tool_paths.items()
+            ],
+            features = features,
+            action_configs = action_configs,
+            cxx_builtin_include_directories = cxx_builtin_include_directories,
         ),
     ]
 
