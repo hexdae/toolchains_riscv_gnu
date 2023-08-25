@@ -65,6 +65,7 @@ filegroup(
     srcs = glob([
         "libexec/**",
         "riscv-none-elf/**",
+        "lib/**",
         "lib/gcc/riscv-none-elf/**",
     ]),
 )
