@@ -1,6 +1,7 @@
 # toolchains/riscv-none-elf/linux/BUILD.bazel
 
 load("@riscv_none_elf//toolchain:config.bzl", "cc_riscv_none_elf_config")
+load("@riscv_none_flags//:flags.bzl", "extra_cflags", "extra_ldflags")
 
 package(default_visibility = ["//visibility:public"])
 
@@ -64,6 +65,8 @@ filegroup(
 
 cc_riscv_none_elf_config(
     name = "config",
+    extra_cflags = extra_cflags,
+    extra_ldflags = extra_ldflags,
     gcc_repo = compiler,
     gcc_version = "12.2.0",
     host_system_name = "linux_x86_64",
