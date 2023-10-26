@@ -1,22 +1,7 @@
 """deps.bzl"""
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
-
-def _flags_rule_impl(repository_ctx):
-    """Implementation of the flags rule"""
-    repository_ctx.file("BUILD", "")
-    repository_ctx.file("flags.bzl", "extra_cflags = {}\nextra_ldflags = {}".format(
-        repository_ctx.attr.extra_cflags,
-        repository_ctx.attr.extra_ldflags,
-    ))
-
-riscv_none_elf_flags = repository_rule(
-    implementation = _flags_rule_impl,
-    attrs = {
-        "extra_cflags": attr.string_list(mandatory = True),
-        "extra_ldflags": attr.string_list(mandatory = True),
-    },
-)
+load("@riscv_none_elf//toolchain:toolchain.bzl", "register_riscv_none_elf_toolchain")
 
 def riscv_none_elf_deps(name = "", extra_cflags = [], extra_ldflags = []):
     """Workspace dependencies for the arm none eabi gcc toolchain
@@ -59,16 +44,7 @@ def riscv_none_elf_deps(name = "", extra_cflags = [], extra_ldflags = []):
         url = "https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/download/v12.2.0-1/xpack-riscv-none-elf-gcc-12.2.0-1-win32-x64.zip",
     )
 
-    riscv_none_elf_flags(
-        name = "riscv_none_flags",
-        extra_cflags = extra_cflags,
-        extra_ldflags = extra_ldflags,
-    )
 
-    native.register_toolchains(
-        "@riscv_none_elf//toolchain:macos",
-        "@riscv_none_elf//toolchain:linux_x86_64",
-        "@riscv_none_elf//toolchain:linux_aarch64",
-        "@riscv_none_elf//toolchain:windows_x86_32",
-        "@riscv_none_elf//toolchain:windows_x86_64",
-    )
+def register_default_riscv_none_elf_toolchains():
+    register_riscv_none_elf_toolchain("//toolchain:riscv32")
+    register_riscv_none_elf_toolchain("//toolchain:riscv64")
