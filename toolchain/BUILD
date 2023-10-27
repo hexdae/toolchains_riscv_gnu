@@ -10,7 +10,6 @@ riscv_none_elf_toolchain(
     ],
 )
 
-
 riscv_none_elf_toolchain(
     name = "riscv64",
     target_compatible_with = [

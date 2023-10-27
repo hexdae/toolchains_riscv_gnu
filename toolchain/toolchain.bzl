@@ -4,16 +4,13 @@ This module provides functions to register an arm-none-eabi toolchain
 
 load("@riscv_none_elf//toolchain:config.bzl", "cc_riscv_none_elf_config")
 
-hosts = ["darwin_x86_64", "linux_x86_64", "linux_aarch64", "windows_x86_32"]
-
-def register_riscv_none_elf_toolchain(name):
-    native.register_toolchains(
-        "{}_macos".format(name),
-        "{}_linux_x86_64".format(name),
-        "{}_linux_aarch64".format(name),
-        "{}_windows_x86_32".format(name),
-        "{}_windows_x86_64".format(name),
-    )
+hosts = {
+    "darwin_x86_64": ["@platforms//os:macos", "@platforms//cpu:x86_64"],
+    "darwin_arm64": ["@platforms//os:macos", "@platforms//cpu:arm64"],
+    "linux_x86_64": ["@platforms//os:linux", "@platforms//cpu:x86_64"],
+    "linux_aarch64": ["@platforms//os:linux", "@platforms//cpu:arm64"],
+    "windows_x86_64": ["@platforms//os:windows", "@platforms//cpu:x86_64"],
+}
 
 def riscv_none_elf_toolchain(name, target_compatible_with = [], copts = [], linkopts = []):
     """
@@ -25,7 +22,7 @@ def riscv_none_elf_toolchain(name, target_compatible_with = [], copts = [], link
         copts: A list of compiler options to apply to the toolchain.
         linkopts: A list of linker options to apply to the toolchain.
     """
-    for host in hosts:
+    for host, exec_compatible_with in hosts.items():
         cc_riscv_none_elf_config(
             name = "config_{}_{}".format(host, name),
             gcc_repo = "riscv_none_elf_{}".format(host),
@@ -51,55 +48,14 @@ def riscv_none_elf_toolchain(name, target_compatible_with = [], copts = [], link
             toolchain_identifier = "riscv_none_elf_{}_{}".format(host, name),
         )
 
-    native.toolchain(
-        name = "{}_macos".format(name),
-        exec_compatible_with = ["@platforms//os:macos"],
-        target_compatible_with = target_compatible_with,
-        toolchain = ":cc_toolchain_darwin_x86_64_{}".format(name),
-        toolchain_type = "@bazel_tools//tools/cpp:toolchain_type",
-    )
+        native.toolchain(
+            name = "{}_{}".format(name, host),
+            exec_compatible_with = exec_compatible_with,
+            target_compatible_with = target_compatible_with,
+            toolchain = ":cc_toolchain_{}_{}".format(host, name),
+            toolchain_type = "@bazel_tools//tools/cpp:toolchain_type",
+        )
 
-    native.toolchain(
-        name = "{}_linux_x86_64".format(name),
-        exec_compatible_with = [
-            "@platforms//os:linux",
-            "@platforms//cpu:x86_64",
-        ],
-        target_compatible_with = target_compatible_with,
-        toolchain = ":cc_toolchain_linux_x86_64_{}".format(name),
-        toolchain_type = "@bazel_tools//tools/cpp:toolchain_type",
-    )
-
-    native.toolchain(
-        name = "{}_linux_aarch64".format(name),
-        exec_compatible_with = [
-            "@platforms//os:linux",
-            "@platforms//cpu:aarch64",
-        ],
-        target_compatible_with = target_compatible_with,
-        toolchain = ":cc_toolchain_linux_aarch64_{}".format(name),
-        toolchain_type = "@bazel_tools//tools/cpp:toolchain_type",
-    )
-
-    native.toolchain(
-        name = "{}_windows_x86_32".format(name),
-        exec_compatible_with = [
-            "@platforms//os:windows",
-            "@platforms//cpu:x86_32",
-        ],
-        target_compatible_with = target_compatible_with,
-        toolchain = ":cc_toolchain_windows_x86_32_{}".format(name),
-        toolchain_type = "@bazel_tools//tools/cpp:toolchain_type",
-    )
-
-    native.toolchain(
-        name = "{}_windows_x86_64".format(name),
-        exec_compatible_with = [
-            "@platforms//os:windows",
-            "@platforms//cpu:x86_64",
-        ],
-        target_compatible_with = target_compatible_with,
-        # No 64bit source is available, so we reuse the 32bit one.
-        toolchain = ":cc_toolchain_windows_x86_32_{}".format(name),
-        toolchain_type = "@bazel_tools//tools/cpp:toolchain_type",
-    )
+def register_riscv_none_elf_toolchain(name):
+    for host in hosts:
+        native.register_toolchains("{}_{}".format(name, host))
