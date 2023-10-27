@@ -1,0 +1,14 @@
+workspace(name = "riscv_custom_toolchain")
+
+local_repository(
+    name = "riscv_none_elf",
+    path = "../..",
+)
+
+load("@riscv_none_elf//:deps.bzl", "riscv_none_elf_deps")
+
+riscv_none_elf_deps()
+
+load("@riscv_none_elf//toolchain:toolchain.bzl", "register_riscv_none_elf_toolchain")
+
+register_riscv_none_elf_toolchain("@//toolchains:riscv32_imac")
