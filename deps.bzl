@@ -33,7 +33,7 @@ def riscv_none_elf_deps(name = "", extra_cflags = [], extra_ldflags = []):
         build_file = "@riscv_none_elf//toolchain:compiler.BUILD",
         sha256 = "68ff464c907c8160308a32babba49ccb0493e480520d5c8513373301e65e7ee2",
         strip_prefix = "xpack-riscv-none-elf-gcc-12.2.0-1",
-        url = "https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/download/v12.2.0-1xpack-riscv-none-elf-gcc-12.2.0-1-linux-arm64.tar.gz",
+        url = "https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/download/v12.2.0-1/xpack-riscv-none-elf-gcc-12.2.0-1-linux-arm64.tar.gz",
     )
 
     http_archive(
