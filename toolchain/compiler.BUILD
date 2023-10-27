@@ -82,6 +82,15 @@ filegroup(
     ]),
 )
 
+filegroup(
+    name = "ar_files",
+    srcs = [
+        ":compiler_pieces",
+        ":ar",
+        ":gcc",
+    ],
+)
+
 # files for executing compiler.
 filegroup(
     name = "compiler_files",
@@ -116,5 +125,6 @@ filegroup(
         ":objcopy",
         ":objdump",
         ":strip",
+        ":compiler_pieces"
     ],
 )

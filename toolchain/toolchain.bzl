@@ -40,7 +40,7 @@ def riscv_none_elf_toolchain(name, target_compatible_with = [], copts = [], link
         native.cc_toolchain(
             name = "cc_toolchain_{}_{}".format(host, name),
             all_files = "@riscv_none_elf_{}//:compiler_pieces".format(host),
-            ar_files = "@riscv_none_elf_{}//:ar".format(host),
+            ar_files = "@riscv_none_elf_{}//:ar_files".format(host),
             compiler_files = "@riscv_none_elf_{}//:compiler_files".format(host),
             dwp_files = ":empty",
             linker_files = "@riscv_none_elf_{}//:linker_files".format(host),
