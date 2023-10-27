@@ -63,9 +63,11 @@ git_repository(
     shallow_since = "<value>",
 )
 
-load("@riscv_none_elf//:deps.bzl", "riscv_none_elf_deps")
+load("@riscv_none_elf//:deps.bzl", "riscv_none_elf_deps", "register_riscv_none_elf_default_toolchains")
 
 riscv_none_elf_deps()
+
+register_riscv_none_elf_default_toolchains()
 #---------------------------------------------------------------------
 ```
 
@@ -97,7 +99,7 @@ platform(
     name = "riscv_none_generic",
     constraint_values = [
         "@platforms//os:none",
-        "@platforms//cpu:arm",
+        "@platforms//cpu:riscv64",
     ],
 )
 ```
@@ -110,10 +112,9 @@ platform(
     constraint_values = [
         "<your additional constraints>",
     ],
-    parents = [
-        "@riscv_none_elf//platforms:riscv_none_generic"
-    ],
 )
+
+An example is provided in `workspaces/custom_toolchain` that shows how to register a toolchain with custom flasgs for `march`
 ```
 
 ## Configurable build attributes
