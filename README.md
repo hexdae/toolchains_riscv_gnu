@@ -234,27 +234,3 @@ bazelisk build examples
 
 This will take care of downloading the appropriate toolchain for your OS and compile all the source files specified by the target.
 
-## Folder structure
-
-```bash
-├── WORKSPACE
-│
-├── examples
-│   ├── BUILD.bazel
-│   └── /* SOURCE CODE */
-│
-└── toolchain
-    ├── BUILD.bazel
-    ├── compiler.BUILD
-    ├── config.bzl
-    └── riscv-none-elf
-        ├── darwin_x86_64
-        │   └── /* DARWIN TOOLCHAIN   */
-        ├── linux_x86_64
-        │   └── /* LINUX TOOLCHAIN    */
-        ├── windows_x86_32
-        │   └── /* WINDOWS TOOLCHAIN  */
-        └── ...
-            └── /* OTHER TOOLCHAINS   */
-
-```
