@@ -23,6 +23,12 @@ filegroup(
     srcs = glob(["bin/riscv-none-elf-gcov*"]),
 )
 
+# gdb executables.
+filegroup(
+    name = "gdb",
+    srcs = glob(["bin/riscv-none-elf-gdb*"]),
+)
+
 # ar executables.
 filegroup(
     name = "ar",
