@@ -65,6 +65,12 @@ filegroup(
     srcs = glob(["bin/riscv-none-elf-as*"]),
 )
 
+# readelf executables.
+filegroup(
+    name = "readelf",
+    srcs = glob(["bin/riscv-none-elf-readelf*"]),
+)
+
 # size executables.
 filegroup(
     name = "size",
@@ -85,8 +91,8 @@ filegroup(
 filegroup(
     name = "ar_files",
     srcs = [
-        ":compiler_pieces",
         ":ar",
+        ":compiler_pieces",
         ":gcc",
     ],
 )
@@ -117,6 +123,7 @@ filegroup(
     srcs = [
         ":ar",
         ":as",
+        ":compiler_pieces",
         ":cpp",
         ":gcc",
         ":gcov",
@@ -125,6 +132,5 @@ filegroup(
         ":objcopy",
         ":objdump",
         ":strip",
-        ":compiler_pieces"
     ],
 )

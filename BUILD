@@ -5,10 +5,12 @@ load("//toolchain:toolchain.bzl", "hosts")
 package(default_visibility = ["//visibility:public"])
 
 TOOLS = [
+    "bin",
     "gcc",
     "ar",
     "ld",
     "nm",
+    "readelf",
     "objcopy",
     "objdump",
     "strip",
