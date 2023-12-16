@@ -1,6 +1,10 @@
 name: Linux
 
-on: [push]
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
 
@@ -8,8 +12,10 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: build examples
-        run: bazelisk build //examples/...
-      - name: build workspaces
-        run: cd workspaces/custom_toolchain && bazelisk build //src/...
+      - uses: actions/checkout@v2
+      - name: Build examples
+        run: |
+          bazelisk build //examples/...
+      - name: Bazel backwards compatibility
+        run: |
+          USE_BAZEL_VERSION=6.4.0 bazelisk build //examples/...

@@ -1,5 +1,5 @@
 """
-This module provides functions to register an arm-none-eabi toolchain
+This module provides functions to register an riscv-none-elf toolchain
 """
 
 load("@riscv_none_elf//toolchain:config.bzl", "cc_riscv_none_elf_config")
@@ -12,24 +12,36 @@ hosts = {
     "windows_x86_64": ["@platforms//os:windows", "@platforms//cpu:x86_64"],
 }
 
-def riscv_none_elf_toolchain(name, target_compatible_with = [], copts = [], linkopts = []):
+def riscv_none_elf_toolchain(name, target_compatible_with = [], copts = [], linkopts = [], version = "12.2.0"):
     """
-    Create an arm-none-eabi toolchain with the given configuration.
+    Create an riscv-none-elf toolchain with the given configuration.
 
     Args:
         name: The name of the toolchain.
         target_compatible_with: A list of constraint values to apply to the toolchain.
         copts: A list of compiler options to apply to the toolchain.
         linkopts: A list of linker options to apply to the toolchain.
+        version: The version of the toolchain to use.
     """
     for host, exec_compatible_with in hosts.items():
         cc_riscv_none_elf_config(
             name = "config_{}_{}".format(host, name),
             gcc_repo = "riscv_none_elf_{}".format(host),
-            gcc_version = "12.2.0",
+            gcc_version = version,
             host_system_name = host,
             toolchain_identifier = "riscv_none_elf_{}_{}".format(host, name),
             toolchain_bins = "@riscv_none_elf_{}//:compiler_components".format(host),
+            include_path = [
+                "@riscv_none_elf_{}//:riscv-none-elf/include".format(host),
+                "@riscv_none_elf_{}//:lib/gcc/riscv-none-elf/{}/include".format(host, version),
+                "@riscv_none_elf_{}//:lib/gcc/riscv-none-elf/{}/include-fixed".format(host, version),
+                "@riscv_none_elf_{}//:riscv-none-elf/include/c++/{}".format(host, version),
+                "@riscv_none_elf_{}//:riscv-none-elf/include/c++/{}/riscv-none-elf".format(host, version),
+            ],
+            library_path = [
+                "@riscv_none_elf_{}//:riscv-none-elf/lib".format(host),
+                "@riscv_none_elf_{}//:lib/gcc/riscv-none-elf/{}".format(host, version),
+            ],
             copts = copts,
             linkopts = linkopts,
         )

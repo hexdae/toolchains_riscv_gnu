@@ -64,28 +64,6 @@ def _impl(ctx):
         "strip",
     )
 
-    include_flags = [
-        "-I",
-        "external/{}/riscv-none-elf/include".format(ctx.attr.gcc_repo),
-        "-I",
-        "external/{}/lib/gcc/riscv-none-elf/{}/include".format(ctx.attr.gcc_repo, ctx.attr.gcc_version),
-        "-I",
-        "external/{}/lib/gcc/riscv-none-elf/{}/include-fixed".format(ctx.attr.gcc_repo, ctx.attr.gcc_version),
-        "-I",
-        "external/{}/riscv-none-elf/include/c++/{}/".format(ctx.attr.gcc_repo, ctx.attr.gcc_version),
-        "-I",
-        "external/{}/riscv-none-elf/include/c++/{}/riscv-none-elf/".format(ctx.attr.gcc_repo, ctx.attr.gcc_version),
-    ]
-
-    linker_flags = [
-        "-L",
-        "external/{}/riscv-none-elf/lib".format(ctx.attr.gcc_repo),
-        "-L",
-        "external/{}/lib/gcc/riscv-none-elf/{}".format(ctx.attr.gcc_repo, ctx.attr.gcc_version),
-        "-llibc.a",
-        "-llibgcc.a",
-    ]
-
     toolchain_compiler_flags = feature(
         name = "compiler_flags",
         enabled = True,
@@ -104,8 +82,12 @@ def _impl(ctx):
                     ACTION_NAMES.clif_match,
                 ],
                 flag_groups = [
-                    flag_group(flags = include_flags + ctx.attr.copts),
-                    flag_group(flags = ["-no-canonical-prefixes"]),
+                    flag_group(flags = ["-I" + include.path for include in ctx.files.include_path]),
+                    flag_group(flags = ctx.attr.copts + [
+                        "-fno-canonical-system-headers",
+                        "-no-canonical-prefixes",
+                        "-nostdinc",
+                    ]),
                 ],
             ),
         ],
@@ -116,48 +98,43 @@ def _impl(ctx):
         enabled = True,
         flag_sets = [
             flag_set(
-                actions = [
-                    ACTION_NAMES.linkstamp_compile,
-                ],
+                actions = [ACTION_NAMES.linkstamp_compile],
                 flag_groups = [
-                    flag_group(flags = linker_flags),
+                    flag_group(flags = ["-L" + include.path for include in ctx.files.library_path]),
                 ],
             ),
         ],
     )
 
-    features = [toolchain_compiler_flags, toolchain_linker_flags]
-
-    if (len(ctx.attr.linkopts)):
-        custom_linkopts = feature(
-            name = "custom_linkopts",
-            enabled = True,
-            flag_sets = [
-                flag_set(
-                    actions = [
-                        ACTION_NAMES.cpp_link_executable,
-                    ],
-                    flag_groups = [
-                        flag_group(flags = ctx.attr.linkopts),
-                    ],
-                ),
-            ],
-        )
-
-        features.append(custom_linkopts)
+    custom_linkopts = feature(
+        name = "custom_linkopts",
+        enabled = True,
+        flag_sets = [
+            flag_set(
+                actions = [ACTION_NAMES.cpp_link_executable],
+                flag_groups = [
+                    flag_group(flags = ctx.attr.linkopts + ["-no-canonical-prefixes"]),
+                ],
+            ),
+        ],
+    )
 
     return cc_common.create_cc_toolchain_config_info(
         ctx = ctx,
         toolchain_identifier = ctx.attr.toolchain_identifier,
         host_system_name = ctx.attr.host_system_name,
-        target_system_name = "riscv-none-elf",
-        target_cpu = "riscv-none-elf",
+        target_system_name = "arm-none-eabi",
+        target_cpu = "arm-none-eabi",
         target_libc = "gcc",
         compiler = ctx.attr.gcc_repo,
         abi_version = "eabi",
         abi_libc_version = ctx.attr.gcc_version,
         action_configs = action_configs,
-        features = features,
+        features = [
+            toolchain_compiler_flags,
+            toolchain_linker_flags,
+            custom_linkopts,
+        ],
     )
 
 cc_riscv_none_elf_config = rule(
@@ -170,6 +147,8 @@ cc_riscv_none_elf_config = rule(
         "gcc_version": attr.string(default = ""),
         "copts": attr.string_list(default = []),
         "linkopts": attr.string_list(default = []),
+        "include_path": attr.label_list(default = [], allow_files = True),
+        "library_path": attr.label_list(default = [], allow_files = True),
     },
     provides = [CcToolchainConfigInfo],
 )
