@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.sha }}
+  cancel-in-progress: true
+
+jobs:
+  integration:
+    name: ${{ matrix.target }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            target: "x86_64-unknown-linux-gnu"
+          - os: macos-12
+            target: "x86_64-apple-darwin"
+          - os: macos-14
+            target: "aarch64-apple-darwin"
+          - os: windows-latest
+            target: "x86_64-pc-windows"
+    env:
+      USE_BAZEL_VERSION: "7.x"
+    steps:
+      - uses: actions/checkout@v2
+      - name: toolchain
+        working-directory: examples/toolchain
+        run: bazel test //...
+      - name: workspace
+        working-directory: examples/workspace
+        run: bazel test //...
