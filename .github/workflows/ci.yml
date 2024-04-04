@@ -31,6 +31,9 @@ jobs:
       USE_BAZEL_VERSION: "7.x"
     steps:
       - uses: actions/checkout@v2
-      - name: custom_toolchain
-        working-directory: examples/custom_toolchain
+      - name: toolchain
+        working-directory: examples/toolchain
+        run: bazel test //...
+      - name: workspace
+        working-directory: examples/workspace
         run: bazel test //...
