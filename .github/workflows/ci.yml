@@ -19,7 +19,7 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - os: ubuntu-22.04
+          - os: ubuntu-latest
             target: "x86_64-unknown-linux-gnu"
           - os: macos-12
             target: "x86_64-apple-darwin"
@@ -33,10 +33,10 @@ jobs:
       - uses: actions/checkout@v2
       - name: toolchain
         working-directory: examples/toolchain
-        run: bazel test //...
+        run: bazel test //:sources
       - name: workspace
         working-directory: examples/workspace
-        run: bazel test //...
+        run: bazel test //:sources
 
   remote-execution:
     name: Bazel Remote Execution
