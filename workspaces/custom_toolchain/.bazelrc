@@ -1,6 +1,0 @@
-# .bazelrc
-
-# Build using platforms by default
-build --incompatible_enable_cc_toolchain_resolution
-build --platforms=//platforms:riscv32_imac
-
