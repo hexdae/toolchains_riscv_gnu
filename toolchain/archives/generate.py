@@ -13,7 +13,7 @@ XPACK = {
     "strip": "xpack-{prefix}-gcc-{version}",
 }
 
-riscv_none_elf = {
+RISCV_NONE_ELF = {
     "template": XPACK,
     "name": "riscv_none_elf",
     "prefix": "riscv-none-elf",
@@ -97,7 +97,7 @@ def main():
         os.chdir(os.environ["BUILD_WORKING_DIRECTORY"])
 
     if args.toolchain == "riscv-none-elf":
-        release = generate_release(**riscv_none_elf, releases=args.releases)
+        release = generate_release(**RISCV_NONE_ELF, releases=args.releases)
         print(json.dumps(release, indent=4))
 
 

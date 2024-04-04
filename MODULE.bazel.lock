@@ -1216,7 +1216,7 @@
   "moduleExtensions": {
     "//:extensions.bzl%riscv_toolchain": {
       "general": {
-        "bzlTransitiveDigest": "f/8FhXGoSI0gWw+wnu76AEXdjt+5QJANMxVc+z2bIUc=",
+        "bzlTransitiveDigest": "wdvCAcuxVyAT9QoYoJXj4TOakKLWj0D1JHd82lQMt+U=",
         "recordedFileInputs": {},
         "recordedDirentsInputs": {},
         "envVariables": {},
