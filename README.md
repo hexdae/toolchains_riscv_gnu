@@ -1,6 +1,6 @@
 <p align="center">
 
-<a href="https://github.com/hexdae/toolchains_riscv_gnu/blob/master/LICENSE">
+<a href="https://github.com/hexdae/toolchains_riscv_gnu/blob/main/LICENSE">
     <img alt="GitHub license" src="https://img.shields.io/github/license/hexdae/toolchains_riscv_gnu?color=success">
 </a>
 
@@ -20,7 +20,9 @@
 
 <p align="center">
 
-<img src="https://asnaghi.me/images/bazel-arm.png" width="400px"/>
+<img src="https://upload.wikimedia.org/wikipedia/en/thumb/7/7d/Bazel_logo.svg/1024px-Bazel_logo.svg.png?20170728105517" height="100px"/>
+
+<img src="https://riscv.org/wp-content/uploads/2020/06/riscv-color.svg" height="100px">
 
 </p>
 

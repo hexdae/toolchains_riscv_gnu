@@ -193,38 +193,6 @@ riscv_none_elf = {
             "strip_prefix": "xpack-riscv-none-elf-gcc-12.2.0-3",
         },
     ],
-    "13.2.0-1": [
-        {
-            "name": "riscv_none_elf_darwin_arm64",
-            "url": "https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/download/v13.2.0-1/xpack-riscv-none-elf-gcc-13.2.0-1-darwin-arm64.tar.gz",
-            "sha256": "a32037a72288f87b356aefde49e474ad9016f90bb7ad37546bb8f916e58c47e7",
-            "strip_prefix": "xpack-riscv-none-elf-gcc-13.2.0-1",
-        },
-        {
-            "name": "riscv_none_elf_darwin_x86_64",
-            "url": "https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/download/v13.2.0-1/xpack-riscv-none-elf-gcc-13.2.0-1-darwin-x64.tar.gz",
-            "sha256": "5b3139c3c3b8a1b49c7791a022d8155c2a16e9d1a02469055027e40a41b288d0",
-            "strip_prefix": "xpack-riscv-none-elf-gcc-13.2.0-1",
-        },
-        {
-            "name": "riscv_none_elf_linux_aarch64",
-            "url": "https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/download/v13.2.0-1/xpack-riscv-none-elf-gcc-13.2.0-1-linux-arm64.tar.gz",
-            "sha256": "6df6ac0dfd2b56a7fe4a2fac74abf7c391a99a906e69aebea097757450683b50",
-            "strip_prefix": "xpack-riscv-none-elf-gcc-13.2.0-1",
-        },
-        {
-            "name": "riscv_none_elf_linux_x86_64",
-            "url": "https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/download/v13.2.0-1/xpack-riscv-none-elf-gcc-13.2.0-1-linux-x64.tar.gz",
-            "sha256": "d7eff5c5d778873c3d486e5d2c805b82582e73081f93edb375a1ef5d84764b43",
-            "strip_prefix": "xpack-riscv-none-elf-gcc-13.2.0-1",
-        },
-        {
-            "name": "riscv_none_elf_windows_x86_64",
-            "url": "https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/download/v13.2.0-1/xpack-riscv-none-elf-gcc-13.2.0-1-win32-x64.zip",
-            "sha256": "9e952f2a6b4c423f3df208391c836c7ff67ffee8df7aae6ca8efc59110bd14b7",
-            "strip_prefix": "xpack-riscv-none-elf-gcc-13.2.0-1",
-        },
-    ],
     "12.3.0-1": [
         {
             "name": "riscv_none_elf_darwin_arm64",
@@ -287,6 +255,38 @@ riscv_none_elf = {
             "url": "https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/download/v12.3.0-2/xpack-riscv-none-elf-gcc-12.3.0-2-win32-x64.zip",
             "sha256": "87e851ebda6a179e988a33b58593c00e13f6edc55c3c73f913d28f10ab983653",
             "strip_prefix": "xpack-riscv-none-elf-gcc-12.3.0-2",
+        },
+    ],
+    "13.2.0-1": [
+        {
+            "name": "riscv_none_elf_darwin_arm64",
+            "url": "https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/download/v13.2.0-1/xpack-riscv-none-elf-gcc-13.2.0-1-darwin-arm64.tar.gz",
+            "sha256": "a32037a72288f87b356aefde49e474ad9016f90bb7ad37546bb8f916e58c47e7",
+            "strip_prefix": "xpack-riscv-none-elf-gcc-13.2.0-1",
+        },
+        {
+            "name": "riscv_none_elf_darwin_x86_64",
+            "url": "https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/download/v13.2.0-1/xpack-riscv-none-elf-gcc-13.2.0-1-darwin-x64.tar.gz",
+            "sha256": "5b3139c3c3b8a1b49c7791a022d8155c2a16e9d1a02469055027e40a41b288d0",
+            "strip_prefix": "xpack-riscv-none-elf-gcc-13.2.0-1",
+        },
+        {
+            "name": "riscv_none_elf_linux_aarch64",
+            "url": "https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/download/v13.2.0-1/xpack-riscv-none-elf-gcc-13.2.0-1-linux-arm64.tar.gz",
+            "sha256": "6df6ac0dfd2b56a7fe4a2fac74abf7c391a99a906e69aebea097757450683b50",
+            "strip_prefix": "xpack-riscv-none-elf-gcc-13.2.0-1",
+        },
+        {
+            "name": "riscv_none_elf_linux_x86_64",
+            "url": "https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/download/v13.2.0-1/xpack-riscv-none-elf-gcc-13.2.0-1-linux-x64.tar.gz",
+            "sha256": "d7eff5c5d778873c3d486e5d2c805b82582e73081f93edb375a1ef5d84764b43",
+            "strip_prefix": "xpack-riscv-none-elf-gcc-13.2.0-1",
+        },
+        {
+            "name": "riscv_none_elf_windows_x86_64",
+            "url": "https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/download/v13.2.0-1/xpack-riscv-none-elf-gcc-13.2.0-1-win32-x64.zip",
+            "sha256": "9e952f2a6b4c423f3df208391c836c7ff67ffee8df7aae6ca8efc59110bd14b7",
+            "strip_prefix": "xpack-riscv-none-elf-gcc-13.2.0-1",
         },
     ],
     "13.2.0-2": [
