@@ -1,6 +1,6 @@
 <p align="center">
 
-<a href="https://github.com/hexdae/toolchains_riscv_gnu/blob/master/LICENSE">
+<a href="https://github.com/hexdae/toolchains_riscv_gnu/blob/main/LICENSE">
     <img alt="GitHub license" src="https://img.shields.io/github/license/hexdae/toolchains_riscv_gnu?color=success">
 </a>
 
