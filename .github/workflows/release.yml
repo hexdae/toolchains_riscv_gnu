@@ -7,9 +7,10 @@ on:
   push:
     tags:
       - "v*.*.*"
+  workflow_dispatch:
 
 jobs:
   release:
     uses: bazel-contrib/.github/.github/workflows/release_ruleset.yaml@v6
     with:
-      release_files: /toolchains_riscv_gnu-*.tar.gz
+      release_files: /toolchains_riscv_gnu_*.tar.gz
