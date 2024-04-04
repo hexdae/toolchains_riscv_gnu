@@ -1,11 +1,11 @@
 {
-    "homepage": "https://github.com/hexdae//toolchains_riscv_gnu",
+    "homepage": "https://github.com/hexdae/toolchains_riscv_gnu",
     "maintainers": {
         "name": "Davide Asnaghi",
         "github": "hexdae"
     },
     "repository": [
-        "github:hexdae//toolchains_riscv_gnu"
+        "github:hexdae/toolchains_riscv_gnu"
     ],
     "versions": [],
     "yanked_versions": {}

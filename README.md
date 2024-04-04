@@ -1,23 +1,19 @@
 <p align="center">
 
-<a href="https://github.com/d-asnaghi//toolchains_riscv_gnu/blob/master/LICENSE">
-    <img alt="GitHub license" src="https://img.shields.io/github/license/d-asnaghi//toolchains_riscv_gnu?color=success">
+<a href="https://github.com/hexdae/toolchains_riscv_gnu/blob/master/LICENSE">
+    <img alt="GitHub license" src="https://img.shields.io/github/license/hexdae/toolchains_riscv_gnu?color=success">
 </a>
 
-<a href="https://github.com/d-asnaghi//toolchains_riscv_gnu/stargazers">
-    <img alt="GitHub stars" src="https://img.shields.io/github/stars/d-asnaghi//toolchains_riscv_gnu?color=success">
+<a href="https://github.com/hexdae/toolchains_riscv_gnu/stargazers">
+    <img alt="GitHub stars" src="https://img.shields.io/github/stars/hexdae/toolchains_riscv_gnu?color=success">
 </a>
 
-<a href="https://github.com/d-asnaghi//toolchains_riscv_gnu/issues">
-    <img alt="GitHub issues" src="https://img.shields.io/github/issues/d-asnaghi//toolchains_riscv_gnu">
+<a href="https://github.com/hexdae/toolchains_riscv_gnu/issues">
+    <img alt="GitHub issues" src="https://img.shields.io/github/issues/hexdae/toolchains_riscv_gnu">
 </a>
 
-<a href="https://github.com/d-asnaghi//toolchains_riscv_gnu/actions">
-    <img alt="CI" src="https://github.com/hexdae//toolchains_riscv_gnu/actions/workflows/ci.yml/badge.svg">
-</a>
-
-<a href="https://github.com/d-asnaghi//toolchains_riscv_gnu/actions">
-    <img alt="Windows" src="https://github.com/d-asnaghi//toolchains_riscv_gnu/workflows/Windows/badge.svg">
+<a href="https://github.com/hexdae/toolchains_riscv_gnu/actions">
+    <img alt="CI" src="https://github.com/hexdae/toolchains_riscv_gnu/actions/workflows/ci.yml/badge.svg">
 </a>
 
 </p>
@@ -32,9 +28,6 @@ The goal of the project is to make arm cross compilation toolchains readily
 available (and customizable) for bazel developers.
 
 If this project was useful to you, give it a ⭐️ and I'll keep improving it!
-
-You might also like another, similar, toolchain project for `bazel`
-[RISCV toolchains](https://github.com/hexdae//toolchains_riscv_gnu)
 
 ## Features
 
@@ -95,7 +88,7 @@ git_repository(
 
 git_repository(
     name = "riscv_none_elf",
-    remote = "https://github.com/hexdae//toolchains_riscv_gnu",
+    remote = "https://github.com/hexdae/toolchains_riscv_gnu",
     branch = "master",
 )
 
