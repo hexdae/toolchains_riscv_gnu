@@ -26,7 +26,7 @@
 
 </p>
 
-The goal of the project is to make arm cross compilation toolchains readily
+The goal of the project is to make cross compilation toolchains readily
 available (and customizable) for bazel developers.
 
 If this project was useful to you, give it a ⭐️ and I'll keep improving it!
@@ -168,17 +168,3 @@ genrule(
 ## Remote execution
 
 This toolchain is compatible with remote execution, see [`remote.yml`](.github/workflows/remote.yml)
-
-## Building with the ARM Linux toolchain on Windows
-
-The Windows maximum path length limitation may cause build failures with the
-`arm-none-linux-gnueabihf` toolchain. In some cases, it's enough to avoid this
-by setting a shorter output directory. Add this to your `.bazelrc` file:
-
-```
-startup --output_user_root=C:/tmp
-```
-
-See [avoid long path issues][1] for more information.
-
-[1]: https://bazel.build/configure/windows#long-path-issues
