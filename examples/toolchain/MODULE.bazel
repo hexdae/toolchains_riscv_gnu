@@ -14,7 +14,7 @@ local_path_override(
 )
 
 riscv_toolchain = use_extension("@toolchains_riscv_gnu//:extensions.bzl", "riscv_toolchain")
-riscv_toolchain.riscv_none_elf(version = "13.2.1")
+riscv_toolchain.riscv_none_elf()
 use_repo(riscv_toolchain, "riscv_none_elf")
 
 register_toolchains("//toolchains:all")
