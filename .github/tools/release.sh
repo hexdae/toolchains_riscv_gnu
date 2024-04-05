@@ -23,7 +23,7 @@ bazel_dep(name = "toolchains_riscv_gnu", version = "${TAG:1}")
 
 # Toolchains: riscv-none-elf
 riscv_toolchain = use_extension("@toolchains_riscv_gnu//:extensions.bzl", "riscv_toolchain")
-riscv_toolchain.riscv_none_elf(version = "13.2.1")
+riscv_toolchain.riscv_none_elf()
 use_repo(riscv_toolchain, "riscv_none_elf")
 
 register_toolchains("@riscv_none_elf//toolchain:all")

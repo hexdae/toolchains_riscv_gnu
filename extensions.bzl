@@ -1,9 +1,7 @@
 """Module extension for toolchains"""
 
-load(
-    "@toolchains_riscv_gnu//:deps.bzl",
-    "riscv_none_elf_deps",
-)
+load("@toolchains_riscv_gnu//toolchain/archives:riscv_none_elf.bzl", "riscv_none_elf")
+load("@toolchains_riscv_gnu//:deps.bzl", "riscv_none_elf_deps")
 
 def _semver(version):
     """Parse a semantic version string into a list of integers."""
@@ -34,7 +32,17 @@ def _compare_versions(left, right):
            compare(left.patch, right.patch) or \
            0
 
-def _minimal_supported_version(versions):
+def _max_version(versions):
+    """Obtains the minimum version from the list of version strings."""
+    if versions:
+        maximum = versions.pop(0)
+        for version in versions:
+            if _compare_versions(maximum, version) < 0:
+                maximum = version
+        return maximum
+    return None
+
+def _min_version(versions):
     """Obtains the minimum version from the list of version strings."""
     if versions:
         minimum = versions.pop(0)
@@ -56,17 +64,15 @@ def _riscv_toolchain_impl(ctx):
 
     for toolchain in available_toolchains:
         versions = [attr.version for mod in ctx.modules for attr in toolchain.tag(mod)]
-        selected = _minimal_supported_version(versions)
+        selected = _min_version(versions)
         if selected:
             toolchain.deps(version = selected)
-
-_toolchain = tag_class(attrs = {
-    "version": attr.string(),
-})
 
 riscv_toolchain = module_extension(
     implementation = _riscv_toolchain_impl,
     tag_classes = {
-        "riscv_none_elf": _toolchain,
+        "riscv_none_elf": tag_class(attrs = {
+            "version": attr.string(default = _max_version(riscv_none_elf.keys())),
+        }),
     },
 )
