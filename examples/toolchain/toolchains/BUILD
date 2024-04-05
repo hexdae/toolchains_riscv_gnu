@@ -1,4 +1,4 @@
-load("@toolchains_riscv_gnu//toolchain:toolchain.bzl", "riscv_none_elf_toolchain")
+load("@riscv_none_elf//toolchain:toolchain.bzl", "riscv_none_elf_toolchain")
 
 riscv_none_elf_toolchain(
     name = "rv32imac",

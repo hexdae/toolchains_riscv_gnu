@@ -51,12 +51,6 @@ def _riscv_gnu_toolchain(
         version = "",
         include_std = False):
     for host, exec_compatible_with in hosts[toolchain_prefix].items():
-        fix_linkopts = []
-
-        # macOS on apple rejects the relative path LTO plugin
-        if version == "13.2.1" and "darwin" in host:
-            fix_linkopts.append("-fno-lto")
-
         cc_riscv_gnu_toolchain_config(
             name = "config_{}_{}".format(host, name),
             gcc_repo = "{}_{}".format(toolchain, host),
@@ -70,7 +64,7 @@ def _riscv_gnu_toolchain(
             include_path = ["@{}_{}//:include_path".format(toolchain, host)],
             library_path = ["@{}_{}//:library_path".format(toolchain, host)],
             copts = copts,
-            linkopts = linkopts + fix_linkopts,
+            linkopts = linkopts,
             include_std = include_std,
         )
 
