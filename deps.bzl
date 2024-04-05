@@ -125,7 +125,7 @@ def toolchains_riscv_gnu_deps(toolchain, toolchain_prefix, version, archives):
             **attrs
         )
 
-def riscv_none_elf_deps(version, archives = riscv_none_elf):
+def riscv_none_elf_deps(version = "13.2.0-2", archives = riscv_none_elf):
     """Workspace dependencies for the arm none eabi gcc toolchain
 
     Args:
