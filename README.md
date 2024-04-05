@@ -33,10 +33,10 @@ If this project was useful to you, give it a ⭐️ and I'll keep improving it!
 
 ## Features
 
-- [MODULE support](#bzlmod)
-- [WORKSPACE support](#workspace)
+- [MODULE and WORKSPACE support](https://github.com/hexdae/toolchains_riscv_gnu/releases)
 - [Direct access to gcc tools](#direct-access-to-gcc-tools)
-- [Custom toolchain support](#custom-toolchain)
+- [Custom toolchain support](./examples/toolchain)
+- [Select GCC version](#module)
 - [Examples](./examples)
 - Remote execution support
 - Linux, MacOS, Windows
@@ -54,14 +54,13 @@ And this to your `.bazelrc`
 build --incompatible_enable_cc_toolchain_resolution
 ```
 
-## Bzlmod
+## MODULE
 
 ```python
 bazel_dep(name = "toolchains_riscv_gnu", version = "<module_version>")
 
-# Toolchains: riscv-none-elf
 riscv_toolchain = use_extension("@toolchains_riscv_gnu//:extensions.bzl", "riscv_toolchain")
-riscv_toolchain.riscv_none_elf(version = "<gcc_version>")
+riscv_toolchain.riscv_none_elf()
 use_repo(riscv_toolchain, "riscv_none_elf")
 
 register_toolchains("@riscv_none_elf//toolchain:all")
