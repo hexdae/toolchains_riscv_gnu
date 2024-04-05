@@ -1,0 +1,67 @@
+load("@toolchains_riscv_gnu//toolchain:config.bzl", "cc_riscv_gnu_toolchain_config")
+load("@rules_cc//cc:defs.bzl", "cc_toolchain")
+
+HOSTS = %hosts%
+
+
+def %toolchain_name%_toolchain(
+        name,
+        version = "%version%",
+        toolchain = "",
+        gcc_tool = "gcc",
+        abi_version = "",
+        copts = [],
+        linkopts = [],
+        target_compatible_with = [],
+        include_std = False
+    ):
+    """
+    Create an riscv-none-elf toolchain with the given configuration.
+
+    Args:
+        name: The name of the toolchain.
+        version: The version of the gcc toolchain.
+        **kwargs: same as toolchains_riscv_gnu
+    """
+    for host_repo, exec_compatible_with in HOSTS.items():
+
+        alias_repo = "@%toolchain_name%//toolchain/{}".format(host_repo)
+
+        cc_riscv_gnu_toolchain_config(
+            name = "config_{}_{}".format(name, host_repo),
+            gcc_repo = host_repo,
+            gcc_version = version,
+            gcc_tool = gcc_tool,
+            abi_version = abi_version,
+            host_system_name = host_repo,
+            toolchain_prefix = "%toolchain_prefix%",
+            toolchain_identifier = host_repo,
+            toolchain_bins = "{}:compiler_components".format(alias_repo),
+            include_path = ["{}:include_path".format(alias_repo)],
+            library_path = ["{}:library_path".format(alias_repo)],
+            copts = copts,
+            linkopts = linkopts,
+            include_std = include_std,
+        )
+
+        cc_toolchain(
+            name = "cc_toolchain_{}_{}".format(name, host_repo),
+            all_files = "{}:compiler_pieces".format(alias_repo),
+            ar_files = "{}:ar_files".format(alias_repo),
+            compiler_files = "{}:compiler_files".format(alias_repo),
+            dwp_files = ":empty",
+            linker_files = "{}:linker_files".format(alias_repo),
+            objcopy_files = "{}:objcopy".format(alias_repo),
+            strip_files = "{}:strip".format(alias_repo),
+            supports_param_files = 0,
+            toolchain_config = ":config_{}_{}".format(name, host_repo),
+            toolchain_identifier = host_repo,
+        )
+
+        native.toolchain(
+            name = "{}_{}".format(name, host_repo),
+            exec_compatible_with = exec_compatible_with,
+            target_compatible_with = target_compatible_with,
+            toolchain = ":cc_toolchain_{}_{}".format(name, host_repo),
+            toolchain_type = "@bazel_tools//tools/cpp:toolchain_type",
+        )
