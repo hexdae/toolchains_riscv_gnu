@@ -18,4 +18,4 @@ jobs:
     with:
       release_files: toolchains_riscv_gnu-*.tar.gz
       release_prep_command: .github/tools/release.sh
-      pre-release: false
+      prerelease: false
