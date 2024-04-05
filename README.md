@@ -57,20 +57,12 @@ build --incompatible_enable_cc_toolchain_resolution
 ## Bzlmod
 
 ```python
-bazel_dep(name = "toolchains_riscv_gnu", version = "0.0.1")
+bazel_dep(name = "toolchains_riscv_gnu", version = "<module_version>")
 
 # Toolchains: riscv-none-elf
 riscv_toolchain = use_extension("@toolchains_riscv_gnu//:extensions.bzl", "riscv_toolchain")
-riscv_toolchain.riscv_none_elf(version = "13.2.1")
-use_repo(
-    riscv_toolchain,
-    "riscv_none_elf",
-    "riscv_none_elf_darwin_arm64",
-    "riscv_none_elf_darwin_x86_64",
-    "riscv_none_elf_linux_aarch64",
-    "riscv_none_elf_linux_x86_64",
-    "riscv_none_elf_windows_x86_64",
-)
+riscv_toolchain.riscv_none_elf(version = "<gcc_version>")
+use_repo(riscv_toolchain, "riscv_none_elf")
 
 register_toolchains("@riscv_none_elf//toolchain:all")
 ```
@@ -104,14 +96,15 @@ Now Bazel will automatically use `riscv-none-elf-gcc` as a compiler.
 
 ## Custom toolchain
 
-If you want to bake certain compiler flags in to your toolchain, you can define a custom `riscv-none-elf` toolchain in your repo.
+If you want to bake certain compiler flags in to your toolchain, you can define
+a custom toolchain in your repo.
 
 In a BUILD file:
 
 ```python
 # path/to/toolchains/BUILD
 
-load("@toolchains_riscv_gnu//toolchain:toolchain.bzl", "riscv_none_elf_toolchain")
+load("@riscv_none_elf//toolchain:toolchain.bzl", "riscv_none_elf_toolchain")
 riscv_none_elf_toolchain(
     name = "custom_toolchain",
     target_compatible_with = [
@@ -129,7 +122,7 @@ riscv_none_elf_toolchain(
 And in your WORKSPACE / MODULE file:
 
 ```python
-register_toolchains("@//path/to/toolchains:all")
+register_toolchains("//path/to/toolchains:all")
 ```
 
 Be careful about registering the default toolchains when using a custom one

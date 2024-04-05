@@ -51,7 +51,6 @@ def _riscv_gnu_toolchain(
         version = "",
         include_std = False):
     for host, exec_compatible_with in hosts[toolchain_prefix].items():
-
         cc_riscv_gnu_toolchain_config(
             name = "config_{}_{}".format(host, name),
             gcc_repo = "{}_{}".format(toolchain, host),

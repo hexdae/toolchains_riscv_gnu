@@ -94,7 +94,18 @@ toolchains_riscv_gnu_repo = repository_rule(
 )
 
 def toolchains_riscv_gnu_deps(toolchain, toolchain_prefix, version, archives):
-    archive = archives[version]
+    """Define dependencies for a riscv toolchain.
+
+    Args:
+        toolchain: The name of the toolchain.
+        toolchain_prefix: The prefix of the toolchain.
+        version: The version of the toolchain.
+        archives: A dictionary of version to archive attributes.
+    """
+    archive = archives.get(version)
+
+    if not archive:
+        fail("Version {} not available in {}".format(version, archives.keys()))
 
     toolchains_riscv_gnu_repo(
         name = toolchain,
@@ -114,7 +125,7 @@ def toolchains_riscv_gnu_deps(toolchain, toolchain_prefix, version, archives):
             **attrs
         )
 
-def riscv_none_elf_deps(version = "13.2.0-2", archives = riscv_none_elf):
+def riscv_none_elf_deps(version, archives = riscv_none_elf):
     """Workspace dependencies for the arm none eabi gcc toolchain
 
     Args:
